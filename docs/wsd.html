@@ -13278,7 +13278,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>sense_vecs have been loaded in:  0.9656171798706055 secs
+<pre>sense_vecs have been loaded in:  1.356163740158081 secs
 </pre>
 </div>
 </div>
@@ -13332,7 +13332,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>word_vecs have been loaded in:  3.538677930831909 secs
+<pre>word_vecs have been loaded in:  3.3434998989105225 secs
 </pre>
 </div>
 </div>
@@ -13469,7 +13469,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>test sentences have been loaded in:  0.7200498580932617 secs
+<pre>test sentences have been loaded in:  0.46253013610839844 secs
 </pre>
 </div>
 </div>
@@ -13515,16 +13515,16 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(iter 1) results have been loaded in:  14.102902173995972 secs
-(iter 2) results have been loaded in:  10.247872591018677 secs
-(iter 3) results have been loaded in:  10.424062967300415 secs
-(iter 4) results have been loaded in:  10.42524790763855 secs
-(iter 5) results have been loaded in:  11.157686948776245 secs
-(iter 6) results have been loaded in:  12.282542943954468 secs
-(iter 7) results have been loaded in:  10.409424066543579 secs
-(iter 8) results have been loaded in:  11.098428964614868 secs
-(iter 9) results have been loaded in:  10.26776385307312 secs
-(iter 10) results have been loaded in:  10.272649049758911 secs
+<pre>(iter 1) results have been loaded in:  13.639203071594238 secs
+(iter 2) results have been loaded in:  10.572648048400879 secs
+(iter 3) results have been loaded in:  11.374758958816528 secs
+(iter 4) results have been loaded in:  10.52796196937561 secs
+(iter 5) results have been loaded in:  10.536474704742432 secs
+(iter 6) results have been loaded in:  10.512830018997192 secs
+(iter 7) results have been loaded in:  10.635956764221191 secs
+(iter 8) results have been loaded in:  10.488242149353027 secs
+(iter 9) results have been loaded in:  10.605721950531006 secs
+(iter 10) results have been loaded in:  10.517795085906982 secs
 </pre>
 </div>
 </div>
@@ -13558,7 +13558,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>average time for testing a single sentence is:  0.0023691905279682106
+<pre>average time for testing a single sentence is:  0.0023418577209319154
 </pre>
 </div>
 </div>
@@ -13613,7 +13613,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>keys have been loaded in:  0.021041154861450195 secs
+<pre>keys have been loaded in:  0.020737886428833008 secs
 </pre>
 </div>
 </div>
@@ -13673,6 +13673,54 @@ Total number of sentences:  3257
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">TP</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">FN</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">FP</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">k1</span><span class="p">,</span> <span class="n">v1</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">k2</span><span class="p">,</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">v1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">TP</span> <span class="o">+=</span> <span class="n">v2</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">FN</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">v2</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">-</span> <span class="n">v2</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        
+<span class="n">p</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">((</span><span class="n">p</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">r</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision: &#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall: &#39;</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1-score: &#39;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Precision:  1.0
+Recall:  0.8084126496776174
+F1-score:  0.8940577249575552
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13682,7 +13730,7 @@ Total number of sentences:  3257
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">Table</span>
@@ -13706,13 +13754,13 @@ Total number of sentences:  3257
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <i>Table length=3257</i>
-<table id="table4657984456-434944" class="table-striped table-bordered table-condensed">
+<table id="table4588296120-529577" class="table-striped table-bordered table-condensed">
 <thead><tr><th>Key</th><th>Sentence</th><th>Index</th><th>Tag</th></tr></thead>
 <tr><td>add.v%2</td><td>if you add the um uh people of various sexual persuasions and those who never intend to marry and those who are retired and those who are um just looking for fun they people with families turn out to be such a small minority that they can&apos;t get the tax bill passed no matter what happens</td><td>0</td><td>VB</td></tr>
 <tr><td>add.v%2</td><td>An added benefit of a warm winter, of course, would be that it would make it clearer than ever that Gore&apos;s concern about global warming is well-founded.</td><td>0</td><td>JJ</td></tr>
@@ -16994,14 +17042,14 @@ require.config({paths: {
     datatables: 'https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min'
 }});
 require(["datatables"], function(){
-    console.log("$('#table4657984456-434944').dataTable()");
+    console.log("$('#table4588296120-529577').dataTable()");
     
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "optionalnum-asc": astropy_sort_num,
     "optionalnum-desc": function (a,b) { return -astropy_sort_num(a, b); }
 });
 
-    $('#table4657984456-434944').dataTable({
+    $('#table4588296120-529577').dataTable({
         order: [],
         pageLength: 50,
         lengthMenu: [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, 'All']],
