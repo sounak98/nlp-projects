@@ -13863,7 +13863,11 @@ F1-score:  0.8307305690181296
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Test-Report">Test Report<a class="anchor-link" href="#Test-Report">&#182;</a></h2>
+<h2 id="Sentence-wise-Analysis,-Observations-and-Result">Sentence-wise Analysis, Observations and Result<a class="anchor-link" href="#Sentence-wise-Analysis,-Observations-and-Result">&#182;</a></h2><p>As we can see the discrepancies are in the sentences where the target word has more than 3-4 major senses. Another hurdle that we faced is that the test dataset was limited and was noisy.</p>
+<p>In some sentences the target word is in a different form than the root form of the word, in these cases we need to lemmatize every word in the sentence before matching it with the given target word. The lemmatization is always not accurate and which gives rise to some unclassified sentences. We can solve this problem by assigning the most common sense to those particular sentences. This is not a very accurate way, but generally gives a good result as the fraction of unclassified sentences is around 1/10th of the whole dataset.</p>
+<p>The f1 metric is not a suitable metric for measuring the accuracy of this test because WSD is not a binary classification task. But to compare with existing models we have computed the f1 score by assuming the precision to be equal to one (in a similar way othe models have computed it).</p>
+<p>The result can be improved using cleaner clusters. The clusters consists of words which are far off from the actual target word semantically, these words needs to be cleaned off to get better and less ambiguous clusters.</p>
+
 </div>
 </div>
 </div>
