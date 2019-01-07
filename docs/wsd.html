@@ -13137,11 +13137,18 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Intuition">Intuition<a class="anchor-link" href="#Intuition">&#182;</a></h2><h3 id="Sense-Determination">Sense Determination<a class="anchor-link" href="#Sense-Determination">&#182;</a></h3><p>We calculate the sense of a target word in a particular context by maximizing the cosine similarity between the aggregate context vector (average of the context word vectors after removing the stop words) and the different sense vectors of the target word.</p>
+<p>Consider a hypothetical sentence <code>A B X C D</code>, where <code>X</code> is the target word. Let the senses for <code>X</code> be <code>X1</code> and <code>X2</code>. We will first calculate the aggregate context vector of <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>'s vectors. Now we can calculate the cosine similarity of this aggregate context vector with vectors of <code>X1</code> and <code>X2</code>. We can then conclude by saying that whichever is more similar to the aggregate context vector is the correct sense.</p>
 <h3 id="Evaluation">Evaluation<a class="anchor-link" href="#Evaluation">&#182;</a></h3><p>For evaluation, we check the key to <strong>group</strong> all the sentences in the test data which have the same sense for the same target word. Then we run the function on all these sentences (of a <em>group</em>) to check whether most of them (ideally all of them) have the same index or not.</p>
 <p>On running the function on all these sentences (of a <em>group</em>) we get the sense indices. We are making an assumption here, that is, the most common sense index that we are obtaining is the correct sense index for this <em>group</em> of sentences. Then the measure of accuracy is calculated using the formula:</p>
 
 <pre><code>accuracy = ∑(g) #(most_common_index(g)) / total_sentences</code></pre>
 <p>where <code>#(most_common_index(g))</code> gives the number of occurences of the most common index on running the function on a <em>group</em> <code>g</code> and <code>total_sentences</code> is the total number of sentences in the test dataset which give a valid output on running the function.</p>
+<p>For example, if in the dataset (according to the correct labels), there are 10 sentences of a particular sense and on running the test we get the following result:</p>
+
+<pre><code>Sense 1: 7
+Sense 2: 2
+Sense 3: 1</code></pre>
+<p>Then, we would consider <code>Sense 1</code> to be the correct sense (without having an actual mapping of our clusters to the senses mentioned in the dataset) and thus our accurary would come out to be <code>7/10</code>.</p>
 
 </div>
 </div>
